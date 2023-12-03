@@ -10,6 +10,7 @@ RUN apt-get update && \
 
 # Install wget to fetch Spark
 RUN apt-get install --yes wget && \
+    apt-get install --yes procps && \
     apt-get clean
 
 # Download and install spark (folder when it can interact with java's default installation folder)
