@@ -1,0 +1,6 @@
+{
+    "build": {
+        "dockerfile": "../containers/Dockerfile_spark",
+        "context": ".."
+    }
+}

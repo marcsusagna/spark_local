@@ -1,0 +1,9 @@
+**.*.pyc
+__pycache__/
+.pytest_cache
+
+scratch.py
+
+data/data/*
+
+devops/venvs
