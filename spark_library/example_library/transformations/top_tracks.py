@@ -34,8 +34,8 @@ class TopTracks(SparkJob):
     TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
     INPUT_FILE_DELIMITER = "\t"
     ARTIST_TRACK_DELIMITER = "--/"
-    SESSION_THRESHOLD_MINUTES = 60
-    NUM_TOP_SESSIONS = 20
+    SESSION_THRESHOLD_MINUTES = 20
+    NUM_TOP_SESSIONS = 50
     NUM_TOP_TRACKS = 10
 
     def __init__(self, job_name: str, path_to_data_folder: str):

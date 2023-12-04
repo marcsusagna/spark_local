@@ -8,6 +8,7 @@ data/*
 tests/mock_data/*
 
 devops/venvs
-spark_library/build
-spark_library/dist
-spark_library.egg-info
+devops/artifacts/
+example_library/build
+example_library/dist
+example_library.egg-info

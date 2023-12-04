@@ -32,10 +32,10 @@
 # docker exec -it $DEVOPS_CONTAINER_NAME /bin/bash
 
 #### Step 0: Initialization build agent assuming running on new VM (no docker for build agents)
-#cd devops
-#python3 -m venv venvs/devops
-#source venvs/devops/bin/activate
-#python3 -m pip install --upgrade pip
-#python3 -m pip install -r requirements_devops.txt
-#cd ..
+cd devops
+python3 -m venv venvs/devops
+source venvs/devops/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements_devops.txt
+cd ..
 

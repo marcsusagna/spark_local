@@ -10,8 +10,8 @@ CLASS_NAME="HelloWorld"
 JOB_NAME="hello_world"
 
 class HelloWorld(SparkJob):
-    def __init__(self, job_name: str):
-        super().__init__(job_name)
+    def __init__(self, job_name: str, path_to_data_folder: str):
+        super().__init__(job_name, path_to_data_folder)
     
     def _create_inputs(self) -> DataFrame:
         schema = T.StructType(

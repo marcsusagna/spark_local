@@ -17,7 +17,7 @@ python3 setup.py bdist_wheel --version=$version
 
 # Move library to dropzone to be uploaded to Artifactory
 whl_name=$(ls dist/)
-mv dist/* ../devops/artifacts/library
+mv -f dist/* ../devops/artifacts/library
 
 ## Step 1.4: Build Docker image
 

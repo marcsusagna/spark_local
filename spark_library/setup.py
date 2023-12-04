@@ -14,13 +14,13 @@ with open(Path(__file__).with_name("requirements.txt")) as f:
     required=f.read().splitlines()
 
 setup(
-    name="spark_library",
+    name="example_library",
     version=version,
     python_requires=">3.10",
     packages=find_packages(),
     install_requires=required,
     entry_points={
-        "console_scripts": ["run_spark_job=spark_library.spark_job_main:main"]
+        "console_scripts": ["run_spark_job.py = example_library.spark_job_main:main"]
     },
     author="Marc Susagna",
     description="Example on a Spark library"

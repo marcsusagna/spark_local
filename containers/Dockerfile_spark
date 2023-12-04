@@ -2,13 +2,13 @@ FROM python:3.10-slim-buster
 
 ARG SPARK_VERSION=3.5.0
 ARG HADOOP_VERSION=3
-ARG LIBRARY_NAME=spark_library
+ARG LIBRARY_NAME=example_library
 ARG LIBRARY_VERSION=0.0.1
 
 # Install Java necessary packages
-RUN apt-get update && \
-    apt-get install --yes default-jre && \
-    apt-get install --yes default-jdk
+RUN apt-get update
+RUN apt-get install --yes default-jre
+RUN apt-get install --yes default-jdk
 
 # Install wget to fetch Spark
 RUN apt-get install --yes wget && \
@@ -29,9 +29,10 @@ ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 # Install python libraries
 COPY spark_library/requirements.txt ./
+COPY "devops/artifacts/library/$LIBRARY_NAME-$LIBRARY_VERSION-py3-none-any.whl" ./
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install -r requirements.txt
-RUN python3 -m pip install "devops/artifacts/library/$LIBRARY_NAME-$LIBRARY_VERSION-py3-none-any.whl"
+RUN python3 -m pip install "$LIBRARY_NAME-$LIBRARY_VERSION-py3-none-any.whl"
 
 WORKDIR /workspace
 

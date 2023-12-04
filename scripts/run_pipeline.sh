@@ -3,20 +3,8 @@
 # Arguments passed as environment variables
 # SPARK_CONTAINER_NAME
 
+# job_to_run: Name of the python file in example_library/transformations that you want to run
 
-echo "Running actual spark job"
-docker exec $CONTAINER_NAME spark-submit --master local[6] --executor-memory 8g ./main.py
+job_to_run=$1
 
-# From spark_library
-data_path=../data/
-spark-submit --master local[6] --executor-memory 8g ./example_library/spark_job_main.py --job top_sessions --data_path $data_path
-
-# From repo root
-data_path=data/
-spark-submit --master local[6] --executor-memory 8g ./spark_library/example_library/spark_job_main.py --job top_sessions --data_path $data_path
-
-# On container: 
-data_path=data/
-docker exec $SPARK_CONTAINER_NAME \
-    spark-submit --master local[6] --executor-memory 8g ./spark_library/example_library/spark_job_main.py --job top_sessions --data_path $data_path
-
+docker exec $SPARK_CONTAINER_NAME /bin/bash -c "bash scripts/pipeline_main.sh $job_to_run"
