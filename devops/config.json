@@ -1,0 +1,7 @@
+{
+    "SPARK_VERSION": "3.5.0",
+    "HADOOP_VERSION": "3",
+    "IMAGE_NAME": "devops_ig",
+    "CONTAINER_NAME": "devops",
+    "VERSION": "0.0.1"
+}

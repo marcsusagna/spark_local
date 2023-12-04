@@ -5,6 +5,9 @@ from pyspark.sql import(
     types as T
 )
 
+from example_library.transformations.top_tracks import TopTracks
+
+
 
 @pytest.fixture(scope="module")
 def spark_session():
@@ -16,12 +19,21 @@ def spark_session():
         SparkSession
         .builder
         .master("local[1]")
-        .config("spark.executor.memory", "2g")
-        .appName("My processing app")
+        .config("spark.executor.memory", "1g")
+        .appName("Testing spark app")
         .getOrCreate()
     )
     return spark_session
 
+@pytest.fixture(scope="module")
+def top_tracks(spark_session):
+    # This is run from spark_library folder
+    top_tracks=TopTracks("top_tracks_test", "tests/mock_data")
+    #Replace constants for testing:
+    top_tracks.SESSION_THRESHOLD_MINUTES=20
+    top_tracks.NUM_TOP_SESSIONS=3
+    top_tracks.NUM_TOP_TRACKS=2
+    return top_tracks
 
 @pytest.fixture(scope="module")
 def input_df(spark_session):
