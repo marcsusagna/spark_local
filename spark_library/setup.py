@@ -1,5 +1,5 @@
 import sys
-from pathlib import pathlib
+from pathlib import Path
 from setuptools import setup, find_packages
 
 # Create version argument

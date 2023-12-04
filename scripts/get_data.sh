@@ -13,3 +13,5 @@ tar -xvf "${file_name}${extension}"
 
 mv $pwd$file_name/* .
 rm -r "$file_name"
+
+cd ..

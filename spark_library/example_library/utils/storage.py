@@ -5,10 +5,11 @@ from pyspark.sql import DataFrame
 
 
 class StorageManager:
-    def __init__(self, path_to_data_folder: str):
+    def __init__(self, path_to_data_folder: str, create_data_folders=True):
         self.data_folder=path_to_data_folder
         self._define_data_paths()
-        self._create_data_folders()
+        if create_data_folders:
+            self._create_data_folders()
     
     def _define_data_paths(self) -> None:
         self.input_dir=self.data_folder

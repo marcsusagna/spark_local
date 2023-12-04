@@ -25,16 +25,16 @@ from example_library.utils.data_health_checks import (
 # 5) Artist name (_c3) and track_name (_c5) Don't have ARTIST_TRACK_DELIMITER in them. Check behavior: warn
 # A violation would just make the track_name harder to retrieve.
 
-CLASS_NAME="TopSessions"
-JOB_NAME="top_sessions"
+CLASS_NAME="TopTracks"
+JOB_NAME="top_tracks"
 
-class TopSessions(SparkJob):
+class TopTracks(SparkJob):
     INPUT_FILE_NAME="userid-timestamp-artid-artname-traid-traname.tsv"
     OUTPUT_FILE_NAME="top_tracks_in_sessions"
     TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
     INPUT_FILE_DELIMITER = "\t"
     ARTIST_TRACK_DELIMITER = "--/"
-    SESSION_THRESHOLD_MINUTES = 20
+    SESSION_THRESHOLD_MINUTES = 60
     NUM_TOP_SESSIONS = 20
     NUM_TOP_TRACKS = 10
 
