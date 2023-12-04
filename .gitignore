@@ -4,6 +4,9 @@ __pycache__/
 
 scratch.py
 
-data/data/*
+data/*
 
 devops/venvs
+spark_library/build
+spark_library/dist
+spark_library.egg-info
