@@ -5,6 +5,7 @@ __pycache__/
 scratch.py
 
 data/*
+tests/mock_data/*
 
 devops/venvs
 spark_library/build

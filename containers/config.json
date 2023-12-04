@@ -1,4 +1,6 @@
 {
     "SPARK_VERSION": "3.5.0",
-    "HADOOP_VERSION": "3"
+    "HADOOP_VERSION": "3",
+    "IMAGE_NAME": "spark_local",
+    "CONTAINER_NAME": "spark_container"
 }

@@ -27,7 +27,8 @@ def spark_session():
 
 @pytest.fixture(scope="module")
 def top_tracks(spark_session):
-    top_tracks=TopTracks("top_tracks_test", ".", False)
+    # This is run from spark_library folder
+    top_tracks=TopTracks("top_tracks_test", "tests/mock_data")
     #Replace constants for testing:
     top_tracks.SESSION_THRESHOLD_MINUTES=20
     top_tracks.NUM_TOP_SESSIONS=3
