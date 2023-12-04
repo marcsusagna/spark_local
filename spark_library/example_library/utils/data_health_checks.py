@@ -4,8 +4,23 @@ from pyspark.sql import (
     types as T
 )
 
-from src.data_health_checks.utils import handle_check_behavior
-
+def handle_check_behavior(check_boolean: bool, except_on_fail: str, check_name: str):
+    """
+    :param check_boolean: Boolean indicating if the check has passed. True means check passed and data quality
+        is as expected
+    :param except_on_fail: Boolean
+    :param check_name:
+    :return:
+    """
+    passing_message = f"{check_name} passed"
+    warning_message = f"{check_name} did not pass, please review input dataset"
+    if check_boolean:
+        print(passing_message)
+    else:
+        if except_on_fail:
+            raise Exception(warning_message)
+        else:
+            print(warning_message)
 
 def null_check(df: DataFrame, columns_to_check: list, except_on_fail=True):
     """

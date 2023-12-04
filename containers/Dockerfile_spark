@@ -26,7 +26,7 @@ ENV SPARK_HOME="/usr/local/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION"
 ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 # Install python libraries
-COPY containers/requirements.txt ./
+COPY spark_library/requirements.txt ./
 RUN python3 -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
