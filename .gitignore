@@ -8,7 +8,6 @@ data/*
 tests/mock_data/*
 
 devops/venvs
-devops/artifacts/
 example_library/build
 example_library/dist
 example_library.egg-info
