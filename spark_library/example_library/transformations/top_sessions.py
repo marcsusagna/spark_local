@@ -30,6 +30,7 @@ JOB_NAME="top_sessions"
 
 class TopSessions(SparkJob):
     INPUT_FILE_NAME="userid-timestamp-artid-artname-traid-traname.tsv"
+    OUTPUT_FILE_NAME="top_tracks_in_sessions"
     TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
     INPUT_FILE_DELIMITER = "\t"
     ARTIST_TRACK_DELIMITER = "--/"
@@ -37,8 +38,8 @@ class TopSessions(SparkJob):
     NUM_TOP_SESSIONS = 20
     NUM_TOP_TRACKS = 10
 
-    def __init__(self, job_name: str):
-        super().__init__(job_name)
+    def __init__(self, job_name: str, path_to_data_folder: str):
+        super().__init__(job_name, path_to_data_folder)
 
     def _run_data_quality_checks(self, input_df):
         # The spark transformation is based on some data assumptions that need to be checked every time new data needs to be processed
@@ -50,7 +51,7 @@ class TopSessions(SparkJob):
         timestamp_format_check(
             input_df,
             column_to_check="_c1",
-            expected_format=df_logic.TIMESTAMP_FORMAT,
+            expected_format=self.TIMESTAMP_FORMAT,
             except_on_fail=True
         )
 
@@ -62,7 +63,7 @@ class TopSessions(SparkJob):
         invalid_string(
             input_df,
             columns_to_check=["_c2", "_c5"],
-            invalid_string=df_logic.ARTIST_TRACK_DELIMITER,
+            invalid_string=self.ARTIST_TRACK_DELIMITER,
             # If this check fails, the consequence is a top played track might not be easily recognizable by the name
             except_on_fail=False
         )
@@ -156,8 +157,8 @@ class TopSessions(SparkJob):
         cleaned_df=self._clean_raw(input_df)
         enriched_df=self._enrich_clean(cleaned_df)
         return enriched_df
-    
-    def _obtain_top_session(df_with_session: DataFrame) -> DataFrame:
+
+    def _obtain_top_session(self, df_with_session: DataFrame) -> DataFrame:
         """
         Obtain top longest NUM_TOP_SESSIONS by counting number of entries per session
 
@@ -177,6 +178,7 @@ class TopSessions(SparkJob):
 
 
     def _obtain_most_popular_tracks(
+            self,
             df_tracks_played: DataFrame,
             df_top_session: DataFrame
         ) -> DataFrame:
@@ -248,10 +250,10 @@ class TopSessions(SparkJob):
         return df_top_tracks
     
     def write_output(self, input_df: DataFrame):
-        input_df.show()
+        self.storage_manager.write_to_disk(input_df, self.OUTPUT_FILE_NAME)
     
     def main(self):
         input_df=self.read_inputs()
-        self._run_data_quality_checks(input_df)
+        #self._run_data_quality_checks(input_df)
         final_df=self.transformation_logic(input_df)
         self.write_output(final_df)

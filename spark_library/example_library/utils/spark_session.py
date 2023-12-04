@@ -8,3 +8,4 @@ class SessionManager:
             .builder
             .getOrCreate()
         )
+        self.spark.sparkContext.setLogLevel("OFF")

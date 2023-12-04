@@ -7,20 +7,19 @@ class SparkJob(ABC):
     """
     Abstract class to define a Spark Job, i.e. the transformation logic on data pipelines
     """
-    DATA_PATH="../../data/"
 
-    def __init__(self, job_name: str):
+    def __init__(self, job_name: str, path_to_data_folder: str):
         self.job_name=job_name
-        self._prepare_spark_job()
+        self._prepare_spark_job(path_to_data_folder)
     
-    def _prepare_spark_job(self) -> None:
+    def _prepare_spark_job(self, path_to_data_folder: str) -> None:
         """
         Retrieves Spark Session and configures storage location
         """
         self.session_manager=SessionManager()
         # Make spark_session first class citizen of class SparkJob
         self.spark=self.session_manager.spark
-        self.storage_manager=StorageManager(self.DATA_PATH)
+        self.storage_manager=StorageManager(path_to_data_folder)
 
     @abstractmethod
     def read_inputs(self):
